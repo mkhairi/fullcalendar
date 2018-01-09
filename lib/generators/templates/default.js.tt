@@ -1,0 +1,7 @@
+//= require moment 
+//= require fullcalendar
+// require fullcalendar/gcal
+
+// require fullcalendar/locale-all
+// or
+// require fullcalendar/locale/ms
