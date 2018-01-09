@@ -1,2 +1,3 @@
 @import "fullcalendar";
-@import "fullcalendar.print";
+//@import "fullcalendar.print";
+//@import "fullcalendar/scheduler";
