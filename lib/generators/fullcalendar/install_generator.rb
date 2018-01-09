@@ -13,7 +13,7 @@ module Fullcalendar
         js_manifest = 'app/assets/javascripts/application.js'
         css_manifest = 'app/assets/stylesheets/application.css'
         scss_manifest = 'app/assets/stylesheets/application.scss'
-        js_strings = "//= require fullcalendar\n"
+        js_strings = "//= require calendar\n"
 
         insert_into_file js_manifest, js_strings, :after => "turbolinks\n" if File.exists?(js_manifest)
         insert_css_strings(css_manifest) if File.exists?(css_manifest)
@@ -25,7 +25,7 @@ module Fullcalendar
       
       def insert_css_strings(css_manifest)
         content = File.read(css_manifest)
-        css_strings = "*/= require fullcalendar\n"
+        css_strings = "*/= require calendar\n"
 
         if requires_tree(content)
           insert_into_file css_manifest, css_strings, :after => "require_tree .\n"
@@ -39,7 +39,7 @@ module Fullcalendar
 
       def insert_scss_strings(scss_manifest)
         content = File.read(scss_manifest)
-        scss_strings = "\n@import \"fullcalendar\";\n"
+        scss_strings = "\n@import \"calendar\";\n"
         append_to_file scss_manifest, scss_strings
       end
 
@@ -52,8 +52,8 @@ module Fullcalendar
       end
       
       def copy_core_file
-        template "#{style}.js.tt", "app/assets/javascripts/fullcalendar.js"
-        template "#{style}.scss.tt", "app/assets/stylesheets/fullcalendar.scss"
+        template "#{style}.js.tt", "app/assets/javascripts/calendar.js"
+        template "#{style}.scss.tt", "app/assets/stylesheets/calendar.scss"
       end
 
     end
