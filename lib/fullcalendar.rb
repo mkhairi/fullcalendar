@@ -69,3 +69,5 @@ module Fullcalendar
   end
 
 end
+
+Fullcalendar.load!
