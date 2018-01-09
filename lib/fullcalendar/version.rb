@@ -1,3 +1,3 @@
 module Fullcalendar
-  VERSION = "0.1.0"
+  VERSION = "3.8.0"
 end
