@@ -1,10 +1,17 @@
-# Fullcalendar
+# Fullcalendar Ruby Gem
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fullcalendar`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem just includes [fullcalendar](https://fullcalendar.io/) and [scheduler](https://fullcalendar.io/scheduler/) as an asset in rails applications or other ruby frameworks
+[Fullcaledar-scheduler](https://fullcalendar.io/scheduler/) is not free for commercial use, so make sure you have a valid [license](https://fullcalendar.io/scheduler/license/) to use scheduler.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
+
+Fullcalendar JavaScript depends on jQuery and moment js. If you're using Rails 5.1+, add the jquery-rails gem to your Gemfile:
+
+```ruby
+gem 'jquery-rails'
+gem 'momentjs-rails'
+```
 
 Add this line to your application's Gemfile:
 
@@ -26,9 +33,6 @@ TODO: Write usage instructions here
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
@@ -36,7 +40,10 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).  
+Fullcalendar and Scheduler, which makes up the majority of this gem, has its own, separate licensing.   
+- Fullcalendar [licensing agreement](https://github.com/fullcalendar/fullcalendar/blob/master/LICENSE.txt)    
+- Scheduler [licensing agreement](https://github.com/fullcalendar/fullcalendar-scheduler/blob/master/LICENSE.md)  
 
 ## Code of Conduct
 
