@@ -27,7 +27,6 @@ Or install it yourself as:
 
     $ gem install fullcalendar
 
-## Usage
 
 ## Install generator
 
@@ -64,7 +63,6 @@ create new file `app/assets/javascripts/calendar.js`
 
 ```
 
-
 ### Stylesheets 
 Include the stylesheet in your `app/assets/stylesheets/application.css`:
 ```
@@ -84,7 +82,6 @@ Create new file `app/assets/stylesheets/calendar.scss`
 @import 'fullcalendar/scheduler';
 ```
 
-
 ### Initialization 
 Where needed in your JavaScripts, initialize your fullcalendar:
 
@@ -94,6 +91,9 @@ $(document).ready(function() {
 });
 ```
 
+## Usage
+see fullcalendar documentations [here](https://fullcalendar.io/docs)
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/fullcalendar. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
@@ -101,9 +101,9 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).  
-Fullcalendar and Scheduler, which makes up the majority of this gem, has its own, separate licensing.   
-- Fullcalendar [licensing agreement](https://github.com/fullcalendar/fullcalendar/blob/master/LICENSE.txt)    
-- Scheduler [licensing agreement](https://github.com/fullcalendar/fullcalendar-scheduler/blob/master/LICENSE.md)  
+Fullcalendar and Scheduler, which makes up the majority of this gem, has its own, separate licensing  agreement.   
+- Fullcalendar [Read license](https://github.com/fullcalendar/fullcalendar/blob/master/LICENSE.txt)    
+- Scheduler [Read license](https://github.com/fullcalendar/fullcalendar-scheduler/blob/master/LICENSE.md)  
 
 ## Code of Conduct
 
