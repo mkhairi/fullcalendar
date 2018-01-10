@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["mkhairi"]
   spec.email         = ["khairi@labs.my"]
 
-  spec.summary       = %q{Fullcalendar, scheduler assets for rails and etc.}
-  spec.description   = %q{Include Fullcalendar, scheduler in asset pipeline with ease}
+  spec.summary       = %q{Gemified Fullcalendar, scheduler assets for rails and etc.}
+  spec.description   = %q{Use Fullcalendar, scheduler in asset pipeline with ease}
   spec.homepage      = "https://github.com/mkhairi/fullcalendar"
   spec.license       = "MIT"
 
