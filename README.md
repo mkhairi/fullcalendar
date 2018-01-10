@@ -29,10 +29,70 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+## Install generator
 
-## Development
+### command
+```ruby
+rails g fullcalendar:install 
+```
 
+this generator will: 
+  -  1. append ```//= require calendar ``` add `app/assets/javascripts/application.js`
+  -  2. append ```*= require calendar ``` add `app/assets/stylesheets/application.css`
+  -  3. create calendar.js  in ```app/assets/javascripts/```
+  -  4. create calendar.scss in  ```app/assets/stylesheets/```
+
+## Manual install
+
+### JavaScripts
+
+Include the JavaScript in your `app/assets/javascripts/application.js`:
+```
+//= require jquery
+//= require calendar
+
+```
+create new file `app/assets/javascripts/calendar.js`
+```
+//Core component
+//= require fullcalendar
+// optional locale
+//= require fullcalendar/locale/ms
+
+//Optional addon scheduler
+//= require fullcalendar/scheduler
+
+```
+
+
+### Stylesheets 
+Include the stylesheet in your `app/assets/stylesheets/application.css`:
+```
+*= require calendar
+```
+
+or if you using scss
+
+Include the stylesheet in your `app/assets/stylesheets/application.scss`:
+```scss
+@import 'calendar';
+```
+
+Create new file `app/assets/stylesheets/calendar.scss`
+```scss
+@import 'fullcalendar';
+@import 'fullcalendar/scheduler';
+```
+
+
+### Initialization 
+Where needed in your JavaScripts, initialize your fullcalendar:
+
+```js
+$(document).ready(function() {
+  $("#calendar").fullcalendar();
+});
+```
 
 ## Contributing
 
