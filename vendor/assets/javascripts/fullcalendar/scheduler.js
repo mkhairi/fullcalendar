@@ -1,5 +1,5 @@
 /*!
- * FullCalendar Scheduler v1.9.1
+ * FullCalendar Scheduler v1.9.2
  * Docs & License: https://fullcalendar.io/scheduler/
  * (c) 2017 Adam Shaw
  */
@@ -554,15 +554,15 @@ var TimelineView = /** @class */ (function (_super) {
     TODO: should maybe be called "normalizeRangeDate".
     */
     TimelineView.prototype.normalizeGridDate = function (date) {
-        var normalDate;
+        var normalDate = date.clone();
+        this.calendar.localizeMoment(normalDate); // mostly for startOf
         if (this.isTimeScale) {
-            normalDate = date.clone();
             if (!normalDate.hasTime()) {
                 normalDate.time(0);
             }
         }
         else {
-            normalDate = date.clone().stripTime();
+            normalDate = normalDate.clone().stripTime();
             if (this.largeUnit) {
                 normalDate.startOf(this.largeUnit);
             }
@@ -3386,7 +3386,8 @@ var ResourceTimelineView = /** @class */ (function (_super) {
             this.isIndiBizRendered = true;
             for (var _i = 0, _a = this.getEventRows(); _i < _a.length; _i++) {
                 var row = _a[_i];
-                row.renderBusinessHours(row.resource.businessHourGenerator || businessHourGenerator);
+                row.renderBusinessHours(row.resource.businessHourGenerator ||
+                    businessHourGenerator);
             }
         }
         else {
@@ -3647,6 +3648,7 @@ var ResourceTimelineView = /** @class */ (function (_super) {
         for (var _i = 0, _a = this.getEventRows(); _i < _a.length; _i++) {
             var rowObj = _a[_i];
             rowObj.helperRenderer.unrender();
+            rowObj.unrenderHighlight();
         }
     };
     // DnD (route to rows)
@@ -3914,7 +3916,7 @@ __webpack_require__(65);
 __webpack_require__(66);
 __webpack_require__(67);
 __webpack_require__(68);
-var schedulerVersion = '1.9.1';
+var schedulerVersion = '1.9.2';
 exportHooks.schedulerVersion = schedulerVersion;
 /*
 When the required internal version is upped,
@@ -5788,7 +5790,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(2);
 var moment = __webpack_require__(15);
 var exportHooks = __webpack_require__(0);
-var RELEASE_DATE = '2017-12-18'; // for Scheduler
+var RELEASE_DATE = '2018-01-28'; // for Scheduler
 var UPGRADE_WINDOW = { years: 1, weeks: 1 }; // 1 week leeway, for tz shift reasons too
 var LICENSE_INFO_URL = 'http://fullcalendar.io/scheduler/license/';
 var PRESET_LICENSE_KEYS = [
