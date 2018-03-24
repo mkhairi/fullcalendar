@@ -1,7 +1,7 @@
 /*!
- * FullCalendar Scheduler v1.9.2
+ * FullCalendar Scheduler v1.9.3
  * Docs & License: https://fullcalendar.io/scheduler/
- * (c) 2017 Adam Shaw
+ * (c) 2018 Adam Shaw
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -12,7 +12,7 @@
 		var a = typeof exports === 'object' ? factory(require("fullcalendar"), require("jquery"), require("moment")) : factory(root["FullCalendar"], root["jQuery"], root["moment"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_15__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_15__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -3916,7 +3916,7 @@ __webpack_require__(65);
 __webpack_require__(66);
 __webpack_require__(67);
 __webpack_require__(68);
-var schedulerVersion = '1.9.2';
+var schedulerVersion = '1.9.3';
 exportHooks.schedulerVersion = schedulerVersion;
 /*
 When the required internal version is upped,
@@ -4853,7 +4853,9 @@ var ResourceRow = /** @class */ (function (_super) {
         if (this.eventsPayload) {
             EventRow_1.default.prototype.executeEventRender.call(this, this.eventsPayload);
         }
-        if (this.businessHourGenerator) {
+        if (this.businessHourGenerator &&
+            this.view.dateProfile // hack
+        ) {
             EventRow_1.default.prototype.renderBusinessHours.call(this, this.businessHourGenerator);
         }
         this.view.publiclyTrigger('resourceRender', {
@@ -5790,7 +5792,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(2);
 var moment = __webpack_require__(15);
 var exportHooks = __webpack_require__(0);
-var RELEASE_DATE = '2018-01-28'; // for Scheduler
+var RELEASE_DATE = '2018-03-04'; // for Scheduler
 var UPGRADE_WINDOW = { years: 1, weeks: 1 }; // 1 week leeway, for tz shift reasons too
 var LICENSE_INFO_URL = 'http://fullcalendar.io/scheduler/license/';
 var PRESET_LICENSE_KEYS = [
