@@ -1,5 +1,5 @@
 /*!
- * FullCalendar Scheduler v1.9.3
+ * FullCalendar Scheduler v1.9.4
  * Docs & License: https://fullcalendar.io/scheduler/
  * (c) 2018 Adam Shaw
  */
@@ -428,7 +428,8 @@ var ResourceDayGrid = /** @class */ (function (_super) {
     };
     ResourceDayGrid.prototype.componentFootprintToSegs = function (componentFootprint) {
         var resourceCnt = this.resourceCnt;
-        var genericSegs = this.datesAboveResources ?
+        var genericSegs = // no assigned resources
+         this.datesAboveResources ?
             this.sliceRangeByDay(componentFootprint.unzonedRange) : // each day-per-resource will need its own column
             this.sliceRangeByRow(componentFootprint.unzonedRange);
         var resourceSegs = [];
@@ -1009,7 +1010,7 @@ var TimelineView = /** @class */ (function (_super) {
         else {
             var snapDiffInt = Math.floor(snapDiff);
             var snapCoverage = this.snapDiffToIndex[snapDiffInt];
-            if (fullcalendar_1.isInt(snapCoverage)) {
+            if (fullcalendar_1.isInt(snapCoverage)) { // not an in-between value
                 snapCoverage += snapDiff - snapDiffInt; // add the remainder
             }
             else {
@@ -1442,7 +1443,7 @@ var TimelineEventRenderer = /** @class */ (function (_super) {
         return segLevels;
     };
     TimelineEventRenderer.prototype.unrenderFgSegs = function (segs) {
-        if (this.component.segContainerEl) {
+        if (this.component.segContainerEl) { // rendered before?
             var eventTitleFollower = this.view.eventTitleFollower;
             for (var _i = 0, segs_7 = segs; _i < segs_7.length; _i++) {
                 var seg = segs_7[_i];
@@ -1579,7 +1580,7 @@ var RowParent = /** @class */ (function (_super) {
         // look for the node in the children array
         for (i = 0; i < children.length; i++) {
             var testChild = children[i];
-            if (testChild === child) {
+            if (testChild === child) { // found!
                 isFound = true;
                 break; // after this, `i` will contain the index
             }
@@ -1589,7 +1590,7 @@ var RowParent = /** @class */ (function (_super) {
         }
         else {
             // rewire the next sibling's prevSibling to skip
-            if (i < (children.length - 1)) {
+            if (i < (children.length - 1)) { // there must be a next sibling
                 children[i + 1].prevSibling = child.prevSibling;
             }
             children.splice(i, 1); // remove node from the array
@@ -1722,7 +1723,7 @@ var RowParent = /** @class */ (function (_super) {
     RowParent.prototype.renderSkeleton = function () {
         this.trHash = {};
         var trNodes = [];
-        if (this.hasOwnRow) {
+        if (this.hasOwnRow) { // only bother rendering TRs if we know this node has a real row
             var prevRow = this.getPrevRowInDom(); // the row before this row, in the overall linear flat list
             // let the view's tbody structure determine which TRs should be rendered
             for (var type in this.view.tbodyHash) {
@@ -2413,7 +2414,8 @@ var ClippedScroller = /** @class */ (function (_super) {
         // display the floating scrollbars. attach a className to force-hide them.
         return scrollEl.toggleClass('fc-no-scrollbars', (this.isHScrollbarsClipped || (this.overflowX === 'hidden')) && // should never show?
             (this.isVScrollbarsClipped || (this.overflowY === 'hidden')) && // should never show?
-            !(scrollbarWidths.top ||
+            !( // doesn't have any scrollbar mass
+            scrollbarWidths.top ||
                 scrollbarWidths.bottom ||
                 scrollbarWidths.left ||
                 scrollbarWidths.right));
@@ -2611,7 +2613,7 @@ var ScrollFollower = /** @class */ (function () {
         }
     };
     ScrollFollower.prototype.clearForce = function () {
-        if (this.isForcedRelative && !this.isTouch) {
+        if (this.isForcedRelative && !this.isTouch) { // don't allow touch to ever NOT be relative
             this.isForcedRelative = false;
             this.iterSprites(function (sprite) { return sprite.assignPosition(); });
         }
@@ -2735,12 +2737,12 @@ var ScrollFollowerSprite = /** @class */ (function () {
         var visibleParentRect = fullcalendar_1.intersectRects(viewportRect, parentRect);
         var rect = null;
         var doAbsolute = false;
-        if (visibleParentRect) {
+        if (visibleParentRect) { // is parent element onscreen?
             rect = copyRect(this.naturalRect);
             var subjectRect = fullcalendar_1.intersectRects(rect, parentRect);
             // will we need to reposition?
             if ((this.isCentered && !testRectContains(viewportRect, parentRect)) || // centering and container not completely in view?
-                (subjectRect && !testRectContains(viewportRect, subjectRect))) {
+                (subjectRect && !testRectContains(viewportRect, subjectRect))) { // subject not completely in view?
                 doAbsolute = true;
                 if (this.isHFollowing) {
                     if (this.isCentered) {
@@ -2749,23 +2751,23 @@ var ScrollFollowerSprite = /** @class */ (function () {
                         rect.right = rect.left + rectWidth;
                     }
                     else {
-                        if (!hContainRect(rect, viewportRect)) {
+                        if (!hContainRect(rect, viewportRect)) { // move into view. already there?
                             doAbsolute = false;
                         }
                     }
-                    if (hContainRect(rect, containerRect)) {
+                    if (hContainRect(rect, containerRect)) { // move within container. needed to move?
                         doAbsolute = false;
                     }
                 }
                 if (this.isVFollowing) {
-                    if (!vContainRect(rect, viewportRect)) {
+                    if (!vContainRect(rect, viewportRect)) { // move into view. already there?
                         doAbsolute = false;
                     }
-                    if (vContainRect(rect, containerRect)) {
+                    if (vContainRect(rect, containerRect)) { // move within container. needed to move?
                         doAbsolute = false;
                     }
                 }
-                if (!testRectContains(viewportRect, rect)) {
+                if (!testRectContains(viewportRect, rect)) { // partially offscreen?
                     doAbsolute = false;
                 }
             }
@@ -2775,7 +2777,7 @@ var ScrollFollowerSprite = /** @class */ (function () {
     };
     ScrollFollowerSprite.prototype.assignPosition = function () {
         if (this.isEnabled) {
-            if (!this.rect) {
+            if (!this.rect) { // completely offscreen?
                 this.unabsolutize();
             }
             else if (this.doAbsolute && !this.follower.isForcedRelative) {
@@ -3195,7 +3197,7 @@ var ResourceTimelineView = /** @class */ (function (_super) {
             this.syncRowHeights(this.rowsNeedingHeightSync);
             this.rowsNeedingHeightSync = null;
         }
-        else {
+        else { // a resize or an event rerender
             this.syncRowHeights(); // sync all
         }
         var headHeight = this.syncHeadHeights();
@@ -3487,7 +3489,7 @@ var ResourceTimelineView = /** @class */ (function (_super) {
             for (var i = 0; i < parent.children.length; i++) {
                 var sibling = parent.children[i];
                 var cmp = this.compareResources(sibling.resource || {}, child.resource || {});
-                if (cmp > 0) {
+                if (cmp > 0) { // went 1 past. insert at i
                     return i;
                 }
             }
@@ -3511,16 +3513,16 @@ var ResourceTimelineView = /** @class */ (function (_super) {
             for (i = 0; i < parent.children.length; i++) {
                 testGroup = parent.children[i];
                 var cmp = fullcalendar_1.flexibleCompare(testGroup.groupValue, groupValue) * spec.order;
-                if (cmp === 0) {
+                if (cmp === 0) { // an exact match with an existing group
                     group = testGroup;
                     break;
                 }
-                else if (cmp > 0) {
+                else if (cmp > 0) { // the row's desired group is after testGroup. insert at this position
                     break;
                 }
             }
         }
-        else {
+        else { // the groups are unordered
             for (i = 0; i < parent.children.length; i++) {
                 testGroup = parent.children[i];
                 if (testGroup.groupValue === groupValue) {
@@ -3566,7 +3568,7 @@ var ResourceTimelineView = /** @class */ (function (_super) {
         (this.rowsNeedingHeightSync || (this.rowsNeedingHeightSync = [])).push(row);
     };
     ResourceTimelineView.prototype.descendantHidden = function (row) {
-        if (!this.rowsNeedingHeightSync) {
+        if (!this.rowsNeedingHeightSync) { // signals to updateSize that specific rows hidden
             this.rowsNeedingHeightSync = [];
         }
     };
@@ -3743,7 +3745,7 @@ var VRowGroup = /** @class */ (function (_super) {
     VRowGroup.prototype.renderRowspan = function () {
         var leadingTr;
         var theme = this.view.calendar.theme;
-        if (this.rowspan) {
+        if (this.rowspan) { // takes up at least one row?
             // ensure the TD element
             if (!this.groupTd) {
                 this.groupTd = $('<td class="' + theme.getClass('widgetContent') + '"/>')
@@ -3753,13 +3755,13 @@ var VRowGroup = /** @class */ (function (_super) {
             // (re)insert groupTd if it was never inserted, or the first TR is different
             leadingTr = this.getLeadingRow().getTr('spreadsheet');
             if (leadingTr !== this.leadingTr) {
-                if (leadingTr) {
+                if (leadingTr) { // might not exist if child was unrendered before parent
                     leadingTr.prepend(this.groupTd); // parents will later prepend their own
                 }
                 this.leadingTr = leadingTr;
             }
         }
-        else {
+        else { // takes up zero rows?
             // remove the TD element if it was rendered
             if (this.groupTd) {
                 this.groupTd.remove();
@@ -3916,7 +3918,7 @@ __webpack_require__(65);
 __webpack_require__(66);
 __webpack_require__(67);
 __webpack_require__(68);
-var schedulerVersion = '1.9.3';
+var schedulerVersion = '1.9.4';
 exportHooks.schedulerVersion = schedulerVersion;
 /*
 When the required internal version is upped,
@@ -4909,10 +4911,11 @@ var ResourceRow = /** @class */ (function (_super) {
         var resource = this.resource;
         for (var _i = 0, _a = this.view.colSpecs; _i < _a.length; _i++) {
             var colSpec = _a[_i];
-            if (colSpec.group) {
+            if (colSpec.group) { // not responsible for group-based rows. VRowGroup is
                 continue;
             }
-            var input = colSpec.field ?
+            var input = // the source text, and the main argument for the filter functions
+             colSpec.field ?
                 resource[colSpec.field] || null :
                 resource;
             var text = typeof colSpec.text === 'function' ?
@@ -4924,7 +4927,7 @@ var ResourceRow = /** @class */ (function (_super) {
                 (text ? fullcalendar_1.htmlEscape(text) : '&nbsp;') +
                 '</span>' +
                 '</div>');
-            if (typeof colSpec.render === 'function') {
+            if (typeof colSpec.render === 'function') { // a filter function for the element
                 contentEl = colSpec.render(resource, contentEl, input) || contentEl;
             }
             var td = $('<td class="' + theme.getClass('widgetContent') + '"/>')
@@ -5174,7 +5177,7 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.prototype.getResources = function (start, end) {
         var isSameRange = (!start && !this.currentStart) || // both nonexistent ranges?
             (start && this.currentStart && start.isSame(this.currentStart) && end.isSame(this.currentEnd));
-        if (!this.fetching || !isSameRange) {
+        if (!this.fetching || !isSameRange) { // first time? or is range different?
             return this.fetchResources(start, end);
         }
         else {
@@ -5774,7 +5777,7 @@ function _filterResourcesWithEvents(sourceResources, resourceIdHits) {
                 filteredResources.push(filteredResource);
             }
         }
-        else {
+        else { // no children, so no need to mask
             if (resourceIdHits[sourceResource.id]) {
                 filteredResources.push(sourceResource);
             }
@@ -5792,7 +5795,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(2);
 var moment = __webpack_require__(15);
 var exportHooks = __webpack_require__(0);
-var RELEASE_DATE = '2018-03-04'; // for Scheduler
+var RELEASE_DATE = '2018-03-27'; // for Scheduler
 var UPGRADE_WINDOW = { years: 1, weeks: 1 }; // 1 week leeway, for tz shift reasons too
 var LICENSE_INFO_URL = 'http://fullcalendar.io/scheduler/license/';
 var PRESET_LICENSE_KEYS = [
@@ -5818,7 +5821,7 @@ function isValidKey(key) {
     if (parts && (parts[1].length === 10)) {
         var purchaseDate = moment.utc(parseInt(parts[2], 10) * 1000);
         var releaseDate = moment.utc(exportHooks.mockSchedulerReleaseDate || RELEASE_DATE);
-        if (releaseDate.isValid()) {
+        if (releaseDate.isValid()) { // token won't be replaced in dev mode
             var minPurchaseDate = releaseDate.clone().subtract(UPGRADE_WINDOW);
             if (purchaseDate.isAfter(minPurchaseDate)) {
                 return true;
@@ -5867,7 +5870,7 @@ fullcalendar_1.DateComponent.prototype.eventRangeToEventFootprints = function (e
             return resourceIds.map(function (resourceId) { return (new fullcalendar_1.EventFootprint(new ResourceComponentFootprint_1.default(eventRange.unzonedRange, eventDef_1.isAllDay(), resourceId), eventDef_1, eventRange.eventInstance // might not exist
             )); });
         }
-        else if (eventDef_1.hasBgRendering()) {
+        else if (eventDef_1.hasBgRendering()) { // TODO: it's strange to be relying on this
             return origMethods.eventRangeToEventFootprints.apply(this, arguments);
         }
         else {
@@ -6183,7 +6186,7 @@ fullcalendar_1.EventDef.prototype.toLegacy = function () {
         resourceIds.length > 1 ?
             resourceIds :
             null;
-    if (this.resourceEditable != null) {
+    if (this.resourceEditable != null) { // allows an unspecified state
         obj.resourceEditable = this.resourceEditable;
     }
     return obj;
