@@ -87,7 +87,7 @@ Where needed in your JavaScripts, initialize your fullcalendar:
 
 ```js
 $(document).ready(function() {
-  $("#calendar").fullcalendar();
+  $("#calendar").fullCalendar();
 });
 ```
 
