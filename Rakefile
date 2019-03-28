@@ -7,7 +7,7 @@ namespace :javascripts do
   desc "Copy #{source_dir}/fullcalendar/packages"
   task :copy do
     rm_rf "vendor/assets/javascripts/fullcalendar"
-    src_dir = "#{source_dir}/fullcalendar-4.0.1/packages/."
+    src_dir = "#{source_dir}/fullcalendar-scheduler-4.0.1/packages/."
     tgt_dir = "vendor/assets/javascripts/fullcalendar/"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
@@ -24,7 +24,7 @@ namespace :stylesheets do
   desc "Copy #{source_dir}/css/"
   task :copy do
     rm_rf "vendor/assets/stylesheets/fullcalendar"
-    src_dir = "#{source_dir}/fullcalendar-4.0.1/packages/."
+    src_dir = "#{source_dir}/fullcalendar-scheduler-4.0.1/packages/."
     tgt_dir = "vendor/assets/stylesheets/fullcalendar/"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
