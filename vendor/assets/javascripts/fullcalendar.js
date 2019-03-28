@@ -1,0 +1,5 @@
+//= require 'fullcalendar/core/main'
+//= require 'fullcalendar/interaction/main'
+//= require 'fullcalendar/daygrid/main'
+//= require 'fullcalendar/timegrid/main'
+//= require 'fullcalendar/list/main'
