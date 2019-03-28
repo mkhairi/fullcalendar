@@ -6,5 +6,5 @@
 /pkg/
 /spec/reports/
 /tmp/
-/fullcalendar-releases
+/fullcalendar-src
 *.gem
